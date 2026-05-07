@@ -40,7 +40,7 @@
       .value { font-size: 52px; font-weight: 900; }
       .label { fill: #eef6ff; font-size: 24px; font-weight: 900; }
       .small { fill: #cbd8e8; font-size: 21px; font-weight: 600; }
-      .mono { font-family: Consolas, Menlo, monospace; font-size: 24px; font-weight: 900; }
+      .mono { font-family: Consolas, Menlo, monospace; font-size: 22px; font-weight: 900; }
     </style>
   </defs>
   <rect width="1600" height="760" rx="0" fill="url(#bg)"/>
@@ -73,7 +73,7 @@
     <rect x="826" y="374" width="312" height="146" rx="24" fill="url(#cardC)" stroke="#ff7bb8" stroke-width="2"/>
     <text class="value" x="854" y="441" fill="#ff7bb8">0.402s</text>
     <text class="label" x="854" y="476">real local write</text>
-    <text class="small" x="854" y="506">process start + JSON write</text>
+    <text class="small" x="854" y="506">startup + JSON write</text>
 
     <rect x="1180" y="374" width="300" height="146" rx="24" fill="#0b2238" stroke="#78dcff" stroke-width="2"/>
     <text class="value" x="1208" y="441" fill="#78dcff">4.74ms</text>
@@ -87,8 +87,8 @@
     <line x1="826" y1="592" x2="1138" y2="592" stroke="#ff7bb8" stroke-width="2" opacity="0.55"/>
     <line x1="1180" y1="592" x2="1480" y2="592" stroke="#78dcff" stroke-width="2" opacity="0.55"/>
     <text class="mono" x="118" y="634" fill="#2af6ff">5,395 rows written</text>
-    <text class="mono" x="472" y="634" fill="#ffd372">13 public EVE JS characters</text>
-    <text class="mono" x="826" y="634" fill="#ff7bb8">Windows + Linux + macOS</text>
+    <text class="mono" x="472" y="634" fill="#ffd372">13 public characters</text>
+    <text class="mono" x="826" y="634" fill="#ff7bb8">Windows / Linux / macOS</text>
     <text class="mono" x="1180" y="634" fill="#78dcff">one-click installer</text>
   </g>
 </svg>

@@ -349,6 +349,34 @@ def find_latest_sde_root() -> Path:
     return max(candidates, key=lambda path: path.stat().st_mtime)
 
 
+def load_reference_data_from_library() -> tuple[dict[int, dict[str, Any]], dict[int, dict[str, Any]], list[ShipHull]]:
+    library = load_library_payload(required=True)
+    hulls: list[ShipHull] = []
+    seen: set[int] = set()
+    for record in library.get("records") or []:
+        if not isinstance(record, dict):
+            continue
+        type_id = to_int(record.get("shipTypeID"), 0)
+        ship_name = str(record.get("shipName") or "").strip()
+        if type_id <= 0 or not ship_name or type_id in seen:
+            continue
+        seen.add(type_id)
+        hulls.append(
+            ShipHull(
+                type_id=type_id,
+                name=ship_name,
+                group_id=to_int(record.get("groupID"), 0),
+                group_name=str(record.get("groupName") or "Ship"),
+            )
+        )
+
+    if not hulls:
+        raise RuntimeError("The bundled FitALL library did not contain a refreshable ship list.")
+
+    hulls.sort(key=lambda item: (item.group_name.lower(), item.name.lower(), item.type_id))
+    return {}, {}, hulls
+
+
 def load_reference_data(sde_root: Path) -> tuple[dict[int, dict[str, Any]], dict[int, dict[str, Any]], list[ShipHull]]:
     types_by_id: dict[int, dict[str, Any]] = {}
     groups_by_id: dict[int, dict[str, Any]] = {}
@@ -465,7 +493,7 @@ def normalize_fit_data(raw_fit_data: list[list[int]], types_by_id: dict[int, dic
         numeric_quantity = to_int(quantity, 0)
         if numeric_type_id <= 0 or numeric_flag_id <= 0 or numeric_quantity <= 0:
             continue
-        if numeric_type_id not in types_by_id:
+        if types_by_id and numeric_type_id not in types_by_id:
             continue
 
         if is_ship_fitting_flag(numeric_flag_id):
@@ -707,7 +735,7 @@ def load_library_payload(*, required: bool = True) -> dict[str, Any]:
     if required:
         raise RuntimeError(
             "No FitALL fitting library was found. Re-run the installer or use build-library "
-            "from an EVE JS checkout with ClientSDE exports."
+            "to refresh the shipped FitALL ship list from zKillboard/ESI."
         )
     return {}
 
@@ -1151,7 +1179,7 @@ def seed_saved_fittings(
 
 def build_library(
     *,
-    sde_root: Path,
+    sde_root: Path | None,
     cache_root: Path,
     max_pages: int,
     max_killmails: int,
@@ -1162,7 +1190,13 @@ def build_library(
     event_callback: EventCallback | None = None,
     log_callback: LogCallback | None = print,
 ) -> dict[str, Any]:
-    types_by_id, _groups_by_id, hulls = load_reference_data(sde_root)
+    if sde_root is not None:
+        types_by_id, _groups_by_id, hulls = load_reference_data(sde_root)
+        source_bundle = str(sde_root)
+    else:
+        types_by_id, _groups_by_id, hulls = load_reference_data_from_library()
+        source_bundle = str(BUNDLED_LIBRARY_JSON_PATH if BUNDLED_LIBRARY_JSON_PATH.exists() else LIBRARY_JSON_PATH)
+
     if limit_hulls and limit_hulls > 0:
         hulls = hulls[:limit_hulls]
 
@@ -1264,7 +1298,7 @@ def build_library(
     library = {
         "generatedAt": now_iso(),
         "tool": "FitALL",
-        "sourceBundle": str(sde_root),
+        "sourceBundle": source_bundle,
         "shipCount": len(records),
         "harvestedCount": len(ok_records),
         "missingCount": len(records) - len(ok_records),
@@ -1424,10 +1458,19 @@ def run_fitall_command(
 ) -> dict[str, Any]:
     needs_build = command in {"build-library", "build-and-seed"}
     if needs_build:
-        ensure_evejs_runtime_ready(require_sde=True)
-        sde_root: Path | None = find_latest_sde_root()
-        source_bundle = str(sde_root)
-        emit_log(log_callback, f"[FitALL] Using ClientSDE bundle: {sde_root}")
+        ensure_evejs_runtime_ready(require_sde=False)
+        sde_root: Path | None = None
+        if os.environ.get("FITALL_USE_CLIENT_SDE") == "1":
+            try:
+                sde_root = find_latest_sde_root()
+            except FileNotFoundError:
+                sde_root = None
+        if sde_root is not None:
+            source_bundle = str(sde_root)
+            emit_log(log_callback, f"[FitALL] Using local SDE bundle: {sde_root}")
+        else:
+            source_bundle = str(BUNDLED_LIBRARY_JSON_PATH if BUNDLED_LIBRARY_JSON_PATH.exists() else LIBRARY_JSON_PATH)
+            emit_log(log_callback, "[FitALL] Refreshing the shipped FitALL ship list from zKillboard/ESI.")
     else:
         ensure_evejs_runtime_ready(require_sde=False)
         sde_root = None
@@ -1457,7 +1500,7 @@ def run_fitall_command(
 
     if command in {"build-library", "build-and-seed"}:
         library = build_library(
-            sde_root=sde_root or find_latest_sde_root(),
+            sde_root=sde_root,
             cache_root=CACHE_OUTPUT_ROOT,
             max_pages=max(1, max_pages),
             max_killmails=max(1, max_killmails),

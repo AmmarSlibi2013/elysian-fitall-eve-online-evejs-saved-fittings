@@ -27,7 +27,7 @@
 
 Elysian FitALL is a tiny desktop tool for [EVE JS](https://github.com/evejs-emu/eve.js) servers. Point it at your EVE JS checkout, press one button, and every character gets one saved fitting for every published ship hull.
 
-The normal path is offline and instant: the release includes the curated FitALL library, so users do not wait on zKillboard or ESI harvesting just to seed their server.
+The normal path is offline and instant: the release includes the curated compact FitALL library, so users do not wait on zKillboard or ESI harvesting just to seed their server. The desktop app also includes a `Refresh fittings from ESI & Killboards` button when you want to rebuild that local fitting library from fresh public data.
 
 ## Download & Install
 
@@ -67,7 +67,7 @@ The installer uses `brew` or the official Python package on macOS, and common Li
   <img src="assets/screenshots/fitall-gui-v1.png" alt="Elysian FitALL desktop app screenshot" width="620">
 </p>
 
-FitALL opens as a small staged desktop app: a John Elysian intro, one clean setup screen, one progress screen, and one done screen. The main action is intentionally simple: `Fit Every Character`.
+FitALL opens as a small staged desktop app: one clean setup screen, one progress screen, and one done screen. The main action is intentionally simple: `Fit Every Character`.
 
 ## Benchmark Receipt
 
@@ -84,6 +84,12 @@ Measured on May 7, 2026 against a fresh local clone of the public EVE JS repo:
 | `0.402s` real write receipt | Python startup + library load + seed + savedFittings JSON write |
 | `4.74ms` best engine dry-run | Hot local seed path without process startup or disk write |
 | `0` skipped characters | Public clone test had enough fitting slots for every character |
+
+## Refresh Fittings
+
+The release ships with `data/fitall-library.json`, a compact all-in-one library containing the fitting records used for instant seeding.
+
+Use `Refresh fittings from ESI & Killboards` when you want FitALL to rebuild the local library from public zKillboard and ESI data. The refresh uses the shipped FitALL ship list, so normal users do not need EVE SDE exports.
 
 ## Built For EVE JS
 

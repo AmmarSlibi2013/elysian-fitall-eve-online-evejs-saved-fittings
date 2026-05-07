@@ -168,15 +168,20 @@ class MetricCard(QFrame):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(18, 14, 18, 14)
         layout.setSpacing(2)
-        value_label = QLabel(value)
-        value_label.setFont(choose_font(24, QFont.Weight.Black))
-        value_label.setStyleSheet(f"color: {accent};")
-        caption = QLabel(label)
-        caption.setFont(choose_font(9, QFont.Weight.Bold))
-        caption.setStyleSheet("color: rgba(235,244,255,0.78);")
-        caption.setWordWrap(True)
-        layout.addWidget(value_label)
-        layout.addWidget(caption)
+        self.value_label = QLabel(value)
+        self.value_label.setFont(choose_font(24, QFont.Weight.Black))
+        self.value_label.setStyleSheet(f"color: {accent};")
+        self.caption = QLabel(label)
+        self.caption.setFont(choose_font(9, QFont.Weight.Bold))
+        self.caption.setStyleSheet("color: rgba(235,244,255,0.78);")
+        self.caption.setWordWrap(True)
+        layout.addWidget(self.value_label)
+        layout.addWidget(self.caption)
+
+    def set_metric(self, value: str, label: str | None = None) -> None:
+        self.value_label.setText(value)
+        if label is not None:
+            self.caption.setText(label)
 
 
 class StagePage(QWidget):
@@ -192,11 +197,15 @@ class FitWorker(QThread):
     finished_ok = Signal(dict)
     failed = Signal(str, str)
 
+    def __init__(self, command: str, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self.command = command
+
     def run(self) -> None:
         started = time.perf_counter()
         try:
             result = fitall.run_fitall_command(
-                command="seed-saved-fittings",
+                command=self.command,
                 event_callback=self.event.emit,
                 log_callback=None,
             )
@@ -213,6 +222,8 @@ class FitALLWindow(QMainWindow):
         self.setFixedSize(WINDOW_W, WINDOW_H)
         self._worker: FitWorker | None = None
         self._seed_total = 0
+        self._build_total = 0
+        self._active_command = "seed-saved-fittings"
         self._last_result: dict[str, Any] = {}
 
         shell = QWidget()
@@ -365,7 +376,11 @@ class FitALLWindow(QMainWindow):
         self.choose_button = QPushButton("Choose EVE JS Folder")
         self.choose_button.setObjectName("Ghost")
         self.choose_button.clicked.connect(self.choose_evejs_folder)
+        self.refresh_button = QPushButton("Refresh fittings from ESI && Killboards")
+        self.refresh_button.setObjectName("Ghost")
+        self.refresh_button.clicked.connect(self.start_refresh)
         self.ready_page.root.addWidget(self.primary_button)
+        self.ready_page.root.addWidget(self.refresh_button)
         self.ready_page.root.addWidget(self.choose_button)
         self.ready_page.root.addStretch(1)
         self.stack.addWidget(self.ready_page)
@@ -434,17 +449,19 @@ class FitALLWindow(QMainWindow):
         library_summary = snapshot.get("librarySummary") or {}
         ship_count = int(library_summary.get("shipCount") or 0)
         harvested = int(library_summary.get("harvestedCount") or 0)
-        self.ship_metric.layout().itemAt(0).widget().setText(format_count(harvested or ship_count))
+        self.ship_metric.set_metric(format_count(harvested or ship_count))
         coverage = "100%" if ship_count and harvested >= ship_count else f"{harvested}/{ship_count}"
-        self.coverage_metric.layout().itemAt(0).widget().setText(coverage)
+        self.coverage_metric.set_metric(coverage)
 
         if fitall.looks_like_evejs_root(fitall.REPO_ROOT):
             self.path_label.setText(f"EVE JS ready: {fitall.REPO_ROOT}")
             self.primary_button.setEnabled(True)
+            self.refresh_button.setEnabled(True)
             self.primary_button.setText("Fit Every Character")
         else:
             self.path_label.setText("Choose your EVE JS folder once. FitALL remembers it after setup.")
             self.primary_button.setEnabled(True)
+            self.refresh_button.setEnabled(True)
             self.primary_button.setText("Choose EVE JS Folder")
 
     @Slot()
@@ -468,11 +485,34 @@ class FitALLWindow(QMainWindow):
             return
         if self._worker and self._worker.isRunning():
             return
+        self._active_command = "seed-saved-fittings"
         self._seed_total = 0
+        self.running_title.setText("Fitting every character")
+        self.running_body.setText("Writing the FitALL library into EVE JS saved fittings.")
         self.progress.set_progress(0.03, active=True)
         self.progress_detail.setText("Loading characters...")
         self.stack.setCurrentWidget(self.running_page)
-        self._worker = FitWorker()
+        self._worker = FitWorker("seed-saved-fittings", self)
+        self._worker.event.connect(self.on_worker_event)
+        self._worker.finished_ok.connect(self.on_worker_done)
+        self._worker.failed.connect(self.on_worker_failed)
+        self._worker.start()
+
+    @Slot()
+    def start_refresh(self) -> None:
+        if not fitall.looks_like_evejs_root(fitall.REPO_ROOT):
+            self.choose_evejs_folder()
+            return
+        if self._worker and self._worker.isRunning():
+            return
+        self._active_command = "build-library"
+        self._build_total = 0
+        self.running_title.setText("Refreshing fittings")
+        self.running_body.setText("Downloading fresh public fits from ESI and zKillboard.")
+        self.progress.set_progress(0.02, active=True)
+        self.progress_detail.setText("Preparing ship list...")
+        self.stack.setCurrentWidget(self.running_page)
+        self._worker = FitWorker("build-library", self)
         self._worker.event.connect(self.on_worker_event)
         self._worker.finished_ok.connect(self.on_worker_done)
         self._worker.failed.connect(self.on_worker_failed)
@@ -499,18 +539,58 @@ class FitALLWindow(QMainWindow):
         if kind == "seed-complete":
             self.progress.set_progress(1.0, active=False)
             self.progress_detail.setText("Saved fittings written.")
+            return
+        if kind == "build-start":
+            self._build_total = int(payload.get("total") or 0)
+            self.running_body.setText("Downloading fresh public fits from ESI and zKillboard.")
+            self.progress_detail.setText(f"Preparing {format_count(self._build_total)} ships...")
+            self.progress.set_progress(0.04, active=True)
+            return
+        if kind == "build-progress":
+            current = int(payload.get("current") or 0)
+            total = max(1, int(payload.get("total") or self._build_total or 1))
+            ship_name = str(payload.get("shipName") or "ship")
+            status = "ready" if payload.get("status") == "ok" else "searching"
+            self.progress.set_progress(current / total, active=True)
+            self.progress_detail.setText(f"{current}/{total} - {ship_name} - {status}")
+            return
+        if kind == "build-complete":
+            summary = payload.get("summary") or {}
+            self.progress.set_progress(1.0, active=False)
+            self.progress_detail.setText(
+                f"Refreshed {format_count(summary.get('harvestedCount'))} / "
+                f"{format_count(summary.get('shipCount'))} fittings."
+            )
 
     @Slot(dict)
     def on_worker_done(self, result: dict[str, Any]) -> None:
         self._last_result = result
-        summary = result.get("seedSummary") or {}
         elapsed = float(result.get("elapsedSeconds") or 0)
-        self.done_chars.layout().itemAt(0).widget().setText(format_count(summary.get("charactersSeeded")))
-        self.done_fits.layout().itemAt(0).widget().setText(format_count(summary.get("toolLibraryFits")))
-        self.done_time.layout().itemAt(0).widget().setText(format_seconds(elapsed))
-        self.done_body.setText(
-            f"{format_count(summary.get('toolRecordsAdded'))} FitALL rows written into EVE JS saved fittings."
-        )
+        if result.get("command") == "build-library":
+            summary = result.get("librarySummary") or {}
+            self.done_title.setText("Fitting library refreshed")
+            self.done_chars.set_metric(format_count(summary.get("harvestedCount")), "ship fittings")
+            self.done_fits.set_metric(format_count(summary.get("publicCount")), "public ESI fits")
+            self.done_time.set_metric(format_seconds(elapsed), "refresh run")
+            self.done_body.setText(
+                "Fresh fittings are now saved locally. The main button will seed this refreshed library."
+            )
+            self.done_again.setText("Fit Every Character")
+            self.done_again.clicked.disconnect()
+            self.done_again.clicked.connect(self.start_seed)
+        else:
+            summary = result.get("seedSummary") or {}
+            self.done_title.setText("Every character is fitted")
+            self.done_chars.set_metric(format_count(summary.get("charactersSeeded")), "characters")
+            self.done_fits.set_metric(format_count(summary.get("toolLibraryFits")), "fits each")
+            self.done_time.set_metric(format_seconds(elapsed), "local run")
+            self.done_body.setText(
+                f"{format_count(summary.get('toolRecordsAdded'))} FitALL rows written into EVE JS saved fittings."
+            )
+            self.done_again.setText("Run Again")
+            self.done_again.clicked.disconnect()
+            self.done_again.clicked.connect(self.start_seed)
+        self.refresh_ready()
         self.stack.setCurrentWidget(self.done_page)
 
     @Slot(str, str)

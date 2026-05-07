@@ -27,7 +27,7 @@
 
 Elysian FitALL is a tiny desktop tool for [EVE JS](https://github.com/evejs-emu/eve.js) servers. Point it at your EVE JS checkout, press one button, and every character gets one saved fitting for every published ship hull.
 
-The normal path is offline and instant: the release includes the curated compact FitALL library, so users do not wait on zKillboard or ESI harvesting just to seed their server. The desktop app also includes a `Refresh fittings from ESI & Killboards` button when you want to rebuild that local fitting library from fresh public data.
+The normal path is offline and instant: the release includes the curated compact FitALL library, so users do not wait on zKillboard or ESI harvesting just to seed their server. The desktop app also includes a `Refresh fittings from ESI & Killboards` button that can rebuild that local fitting library from fresh public data using FitALL's embedded ship catalog.
 
 ## Download & Install
 
@@ -43,7 +43,7 @@ https://github.com/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings/re
 
 Extract `Elysian-FitALL.zip`, then double-click `Install.bat`.
 
-The installer checks free disk space, Python, the local virtual environment, PySide6, and your EVE JS database paths. If Python is missing, it tries to install Python automatically, then launches the app.
+The installer checks free disk space, Python, the local virtual environment, PySide6, and your EVE JS database paths. If Python is missing, it tries to install Python automatically, opens a folder picker for your EVE JS checkout, then launches the app.
 
 After setup, use `StartFitALL.bat`.
 
@@ -79,7 +79,7 @@ Measured on May 7, 2026 against a fresh local clone of the public EVE JS repo:
 
 | Result | Meaning |
 | --- | --- |
-| `415 / 415` ship fittings | One saved fitting for every published ship hull in the bundled library |
+| `415 / 415` ship fittings | One saved fitting for every current public EVE ship hull, capped against EVE JS's 500 saved-fitting limit |
 | `5,395` rows generated | 13 public EVE JS characters x 415 fittings |
 | `0.402s` real write receipt | Python startup + library load + seed + savedFittings JSON write |
 | `4.74ms` best engine dry-run | Hot local seed path without process startup or disk write |
@@ -89,7 +89,7 @@ Measured on May 7, 2026 against a fresh local clone of the public EVE JS repo:
 
 The release ships with `data/fitall-library.json`, a compact all-in-one library containing the fitting records used for instant seeding.
 
-Use `Refresh fittings from ESI & Killboards` when you want FitALL to rebuild the local library from public zKillboard and ESI data. The refresh uses the shipped FitALL ship list, so normal users do not need EVE SDE exports.
+Use `Refresh fittings from ESI & Killboards` when you want FitALL to rebuild the local library from public zKillboard and ESI data. The refresh uses an embedded ship catalog inside the app itself, so normal users do not need EVE SDE exports or extra data downloads.
 
 ## Built For EVE JS
 

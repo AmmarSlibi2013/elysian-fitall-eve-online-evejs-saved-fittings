@@ -54,6 +54,427 @@ DEFAULT_THREAD_COUNT = 6
 DEFAULT_MAX_PAGES = 4
 DEFAULT_MAX_KILLMAILS = 4
 
+# BEGIN EMBEDDED SHIP HULLS
+EMBEDDED_SHIP_HULLS: tuple[tuple[int, str, int, str], ...] = (
+    (32788, 'Cambion', 324, 'Assault Frigate'),
+    (12044, 'Enyo', 324, 'Assault Frigate'),
+    (32207, 'Freki', 324, 'Assault Frigate'),
+    (74141, 'Geri', 324, 'Assault Frigate'),
+    (11381, 'Harpy', 324, 'Assault Frigate'),
+    (11379, 'Hawk', 324, 'Assault Frigate'),
+    (12042, 'Ishkur', 324, 'Assault Frigate'),
+    (11400, 'Jaguar', 324, 'Assault Frigate'),
+    (3516, 'Malice', 324, 'Assault Frigate'),
+    (52250, 'Nergal', 324, 'Assault Frigate'),
+    (11393, 'Retribution', 324, 'Assault Frigate'),
+    (78414, 'Shapash', 324, 'Assault Frigate'),
+    (2834, 'Utu', 324, 'Assault Frigate'),
+    (11365, 'Vengeance', 324, 'Assault Frigate'),
+    (11371, 'Wolf', 324, 'Assault Frigate'),
+    (89807, 'Anhinga', 1201, 'Attack Battlecruiser'),
+    (4306, 'Naga', 1201, 'Attack Battlecruiser'),
+    (4302, 'Oracle', 1201, 'Attack Battlecruiser'),
+    (4308, 'Talos', 1201, 'Attack Battlecruiser'),
+    (4310, 'Tornado', 1201, 'Attack Battlecruiser'),
+    (24692, 'Abaddon', 27, 'Battleship'),
+    (642, 'Apocalypse', 27, 'Battleship'),
+    (11936, 'Apocalypse Imperial Issue', 27, 'Battleship'),
+    (17726, 'Apocalypse Navy Issue', 27, 'Battleship'),
+    (643, 'Armageddon', 27, 'Battleship'),
+    (11938, 'Armageddon Imperial Issue', 27, 'Battleship'),
+    (32305, 'Armageddon Navy Issue', 27, 'Battleship'),
+    (33820, 'Barghest', 27, 'Battleship'),
+    (17920, 'Bhaalgorn', 27, 'Battleship'),
+    (645, 'Dominix', 27, 'Battleship'),
+    (32307, 'Dominix Navy Issue', 27, 'Battleship'),
+    (24690, 'Hyperion', 27, 'Battleship'),
+    (47271, 'Leshak', 27, 'Battleship'),
+    (17738, 'Machariel', 27, 'Battleship'),
+    (24694, 'Maelstrom', 27, 'Battleship'),
+    (641, 'Megathron', 27, 'Battleship'),
+    (13202, 'Megathron Federate Issue', 27, 'Battleship'),
+    (17728, 'Megathron Navy Issue', 27, 'Battleship'),
+    (33472, 'Nestor', 27, 'Battleship'),
+    (17736, 'Nightmare', 27, 'Battleship'),
+    (47466, 'Praxis', 27, 'Battleship'),
+    (17918, 'Rattlesnake', 27, 'Battleship'),
+    (638, 'Raven', 27, 'Battleship'),
+    (17636, 'Raven Navy Issue', 27, 'Battleship'),
+    (26840, 'Raven State Issue', 27, 'Battleship'),
+    (24688, 'Rokh', 27, 'Battleship'),
+    (640, 'Scorpion', 27, 'Battleship'),
+    (32309, 'Scorpion Navy Issue', 27, 'Battleship'),
+    (639, 'Tempest', 27, 'Battleship'),
+    (17732, 'Tempest Fleet Issue', 27, 'Battleship'),
+    (26842, 'Tempest Tribal Issue', 27, 'Battleship'),
+    (54733, 'Thunderchild', 27, 'Battleship'),
+    (644, 'Typhoon', 27, 'Battleship'),
+    (32311, 'Typhoon Fleet Issue', 27, 'Battleship'),
+    (17740, 'Vindicator', 27, 'Battleship'),
+    (44996, 'Marshal', 898, 'Black Ops'),
+    (22440, 'Panther', 898, 'Black Ops'),
+    (85236, 'Python', 898, 'Black Ops'),
+    (22428, 'Redeemer', 898, 'Black Ops'),
+    (22430, 'Sin', 898, 'Black Ops'),
+    (22436, 'Widow', 898, 'Black Ops'),
+    (12729, 'Crane', 1202, 'Blockade Runner'),
+    (81046, 'Deluge', 1202, 'Blockade Runner'),
+    (12733, 'Prorator', 1202, 'Blockade Runner'),
+    (12735, 'Prowler', 1202, 'Blockade Runner'),
+    (12743, 'Viator', 1202, 'Blockade Runner'),
+    (28352, 'Rorqual', 883, 'Capital Industrial Ship'),
+    (670, 'Capsule', 29, 'Capsule'),
+    (33328, "Capsule - Genolution 'Auroral' 197-variant", 29, 'Capsule'),
+    (23757, 'Archon', 547, 'Carrier'),
+    (23915, 'Chimera', 547, 'Carrier'),
+    (24483, 'Nidhoggur', 547, 'Carrier'),
+    (23911, 'Thanatos', 547, 'Carrier'),
+    (78366, 'Alligator', 419, 'Combat Battlecruiser'),
+    (16229, 'Brutix', 419, 'Combat Battlecruiser'),
+    (33151, 'Brutix Navy Issue', 419, 'Combat Battlecruiser'),
+    (85086, 'Cenotaph', 419, 'Combat Battlecruiser'),
+    (16231, 'Cyclone', 419, 'Combat Battlecruiser'),
+    (72811, 'Cyclone Fleet Issue', 419, 'Combat Battlecruiser'),
+    (24698, 'Drake', 419, 'Combat Battlecruiser'),
+    (33153, 'Drake Navy Issue', 419, 'Combat Battlecruiser'),
+    (49711, 'Drekavac', 419, 'Combat Battlecruiser'),
+    (16227, 'Ferox', 419, 'Combat Battlecruiser'),
+    (72812, 'Ferox Navy Issue', 419, 'Combat Battlecruiser'),
+    (3756, 'Gnosis', 419, 'Combat Battlecruiser'),
+    (24696, 'Harbinger', 419, 'Combat Battlecruiser'),
+    (33155, 'Harbinger Navy Issue', 419, 'Combat Battlecruiser'),
+    (24702, 'Hurricane', 419, 'Combat Battlecruiser'),
+    (33157, 'Hurricane Fleet Issue', 419, 'Combat Battlecruiser'),
+    (78369, 'Khizriel', 419, 'Combat Battlecruiser'),
+    (24700, 'Myrmidon', 419, 'Combat Battlecruiser'),
+    (72869, 'Myrmidon Navy Issue', 419, 'Combat Battlecruiser'),
+    (16233, 'Prophecy', 419, 'Combat Battlecruiser'),
+    (72872, 'Prophecy Navy Issue', 419, 'Combat Battlecruiser'),
+    (20125, 'Curse', 906, 'Combat Recon Ship'),
+    (11961, 'Huginn', 906, 'Combat Recon Ship'),
+    (11971, 'Lachesis', 906, 'Combat Recon Ship'),
+    (11959, 'Rook', 906, 'Combat Recon Ship'),
+    (37480, 'Bifrost', 1534, 'Command Destroyer'),
+    (52254, 'Draugur', 1534, 'Command Destroyer'),
+    (37483, 'Magus', 1534, 'Command Destroyer'),
+    (89649, 'Outrider', 1534, 'Command Destroyer'),
+    (37481, 'Pontifex', 1534, 'Command Destroyer'),
+    (37482, 'Stork', 1534, 'Command Destroyer'),
+    (22448, 'Absolution', 540, 'Command Ship'),
+    (22466, 'Astarte', 540, 'Command Ship'),
+    (22468, 'Claymore', 540, 'Command Ship'),
+    (22474, 'Damnation', 540, 'Command Ship'),
+    (22442, 'Eos', 540, 'Command Ship'),
+    (22470, 'Nighthawk', 540, 'Command Ship'),
+    (22444, 'Sleipnir', 540, 'Command Ship'),
+    (22446, 'Vulture', 540, 'Command Ship'),
+    (617, 'Echo', 237, 'Corvette'),
+    (33079, 'Hematos', 237, 'Corvette'),
+    (601, 'Ibis', 237, 'Corvette'),
+    (615, 'Immolator', 237, 'Corvette'),
+    (596, 'Impairor', 237, 'Corvette'),
+    (588, 'Reaper', 237, 'Corvette'),
+    (33081, 'Taipan', 237, 'Corvette'),
+    (606, 'Velator', 237, 'Corvette'),
+    (33083, 'Violator', 237, 'Corvette'),
+    (11188, 'Anathema', 830, 'Covert Ops'),
+    (11192, 'Buzzard', 830, 'Covert Ops'),
+    (42246, 'Caedes', 830, 'Covert Ops'),
+    (11182, 'Cheetah', 830, 'Covert Ops'),
+    (33397, 'Chremoas', 830, 'Covert Ops'),
+    (11172, 'Helios', 830, 'Covert Ops'),
+    (48636, 'Hydra', 830, 'Covert Ops'),
+    (44993, 'Pacifier', 830, 'Covert Ops'),
+    (85062, 'Sidewinder', 830, 'Covert Ops'),
+    (628, 'Arbitrator', 26, 'Cruiser'),
+    (17922, 'Ashimmu', 26, 'Cruiser'),
+    (625, 'Augoror', 26, 'Cruiser'),
+    (29337, 'Augoror Navy Issue', 26, 'Cruiser'),
+    (630, 'Bellicose', 26, 'Cruiser'),
+    (632, 'Blackbird', 26, 'Cruiser'),
+    (621, 'Caracal', 26, 'Cruiser'),
+    (17634, 'Caracal Navy Issue', 26, 'Cruiser'),
+    (633, 'Celestis', 26, 'Cruiser'),
+    (17720, 'Cynabal', 26, 'Cruiser'),
+    (634, 'Exequror', 26, 'Cruiser'),
+    (29344, 'Exequror Navy Issue', 26, 'Cruiser'),
+    (17715, 'Gila', 26, 'Cruiser'),
+    (11011, 'Guardian-Vexor', 26, 'Cruiser'),
+    (624, 'Maller', 26, 'Cruiser'),
+    (623, 'Moa', 26, 'Cruiser'),
+    (2006, 'Omen', 26, 'Cruiser'),
+    (17709, 'Omen Navy Issue', 26, 'Cruiser'),
+    (33818, 'Orthrus', 26, 'Cruiser'),
+    (620, 'Osprey', 26, 'Cruiser'),
+    (29340, 'Osprey Navy Issue', 26, 'Cruiser'),
+    (17718, 'Phantasm', 26, 'Cruiser'),
+    (49712, 'Rodiva', 26, 'Cruiser'),
+    (629, 'Rupture', 26, 'Cruiser'),
+    (631, 'Scythe', 26, 'Cruiser'),
+    (29336, 'Scythe Fleet Issue', 26, 'Cruiser'),
+    (622, 'Stabber', 26, 'Cruiser'),
+    (17713, 'Stabber Fleet Issue', 26, 'Cruiser'),
+    (54732, 'Stormbringer', 26, 'Cruiser'),
+    (33470, 'Stratios', 26, 'Cruiser'),
+    (33553, 'Stratios Emergency Responder', 26, 'Cruiser'),
+    (627, 'Thorax', 26, 'Cruiser'),
+    (47270, 'Vedmak', 26, 'Cruiser'),
+    (626, 'Vexor', 26, 'Cruiser'),
+    (17843, 'Vexor Navy Issue', 26, 'Cruiser'),
+    (17722, 'Vigilant', 26, 'Cruiser'),
+    (12731, 'Bustard', 380, 'Deep Space Transport'),
+    (12753, 'Impel', 380, 'Deep Space Transport'),
+    (12747, 'Mastodon', 380, 'Deep Space Transport'),
+    (12745, 'Occator', 380, 'Deep Space Transport'),
+    (81047, 'Torrent', 380, 'Deep Space Transport'),
+    (32872, 'Algos', 420, 'Destroyer'),
+    (16240, 'Catalyst', 420, 'Destroyer'),
+    (73796, 'Catalyst Navy Issue', 420, 'Destroyer'),
+    (16236, 'Coercer', 420, 'Destroyer'),
+    (73789, 'Coercer Navy Issue', 420, 'Destroyer'),
+    (32876, 'Corax', 420, 'Destroyer'),
+    (16238, 'Cormorant', 420, 'Destroyer'),
+    (73795, 'Cormorant Navy Issue', 420, 'Destroyer'),
+    (32874, 'Dragoon', 420, 'Destroyer'),
+    (49710, 'Kikimora', 420, 'Destroyer'),
+    (78367, 'Mamba', 420, 'Destroyer'),
+    (78333, 'Mekubal', 420, 'Destroyer'),
+    (91174, 'Perseverance', 420, 'Destroyer'),
+    (89240, 'Pioneer', 420, 'Destroyer'),
+    (89647, 'Pioneer Consortium Issue', 420, 'Destroyer'),
+    (42685, 'Sunesis', 420, 'Destroyer'),
+    (32878, 'Talwar', 420, 'Destroyer'),
+    (85087, 'Tholos', 420, 'Destroyer'),
+    (16242, 'Thrasher', 420, 'Destroyer'),
+    (73794, 'Thrasher Fleet Issue', 420, 'Destroyer'),
+    (45647, 'Caiman', 485, 'Dreadnought'),
+    (42243, 'Chemosh', 485, 'Dreadnought'),
+    (19724, 'Moros', 485, 'Dreadnought'),
+    (73792, 'Moros Navy Issue', 485, 'Dreadnought'),
+    (19722, 'Naglfar', 485, 'Dreadnought'),
+    (73787, 'Naglfar Fleet Issue', 485, 'Dreadnought'),
+    (19726, 'Phoenix', 485, 'Dreadnought'),
+    (73793, 'Phoenix Navy Issue', 485, 'Dreadnought'),
+    (19720, 'Revelation', 485, 'Dreadnought'),
+    (73790, 'Revelation Navy Issue', 485, 'Dreadnought'),
+    (87381, 'Sarathiel', 485, 'Dreadnought'),
+    (42124, 'Vehement', 485, 'Dreadnought'),
+    (52907, 'Zirnitra', 485, 'Dreadnought'),
+    (11387, 'Hyena', 893, 'Electronic Attack Ship'),
+    (11174, 'Keres', 893, 'Electronic Attack Ship'),
+    (11194, 'Kitsune', 893, 'Electronic Attack Ship'),
+    (60765, 'Raiju', 893, 'Electronic Attack Ship'),
+    (11190, 'Sentinel', 893, 'Electronic Attack Ship'),
+    (22544, 'Hulk', 543, 'Exhumer'),
+    (22548, 'Mackinaw', 543, 'Exhumer'),
+    (22546, 'Skiff', 543, 'Exhumer'),
+    (89607, 'Odysseus', 4902, 'Expedition Command Ship'),
+    (37135, 'Endurance', 1283, 'Expedition Frigate'),
+    (33697, 'Prospect', 1283, 'Expedition Frigate'),
+    (45534, 'Monitor', 1972, 'Flag Cruiser'),
+    (37604, 'Apostle', 1538, 'Force Auxiliary'),
+    (42242, 'Dagon', 1538, 'Force Auxiliary'),
+    (37606, 'Lif', 1538, 'Force Auxiliary'),
+    (45645, 'Loggerhead', 1538, 'Force Auxiliary'),
+    (37605, 'Minokawa', 1538, 'Force Auxiliary'),
+    (37607, 'Ninazu', 1538, 'Force Auxiliary'),
+    (11969, 'Arazu', 833, 'Force Recon Ship'),
+    (33675, 'Chameleon', 833, 'Force Recon Ship'),
+    (85229, 'Cobra', 833, 'Force Recon Ship'),
+    (44995, 'Enforcer', 833, 'Force Recon Ship'),
+    (11957, 'Falcon', 833, 'Force Recon Ship'),
+    (33395, 'Moracha', 833, 'Force Recon Ship'),
+    (11965, 'Pilgrim', 833, 'Force Recon Ship'),
+    (11963, 'Rapier', 833, 'Force Recon Ship'),
+    (48635, 'Tiamat', 833, 'Force Recon Ship'),
+    (45531, 'Victor', 833, 'Force Recon Ship'),
+    (81040, 'Avalanche', 513, 'Freighter'),
+    (34328, 'Bowhead', 513, 'Freighter'),
+    (20185, 'Charon', 513, 'Freighter'),
+    (20189, 'Fenrir', 513, 'Freighter'),
+    (20187, 'Obelisk', 513, 'Freighter'),
+    (20183, 'Providence', 513, 'Freighter'),
+    (33468, 'Astero', 25, 'Frigate'),
+    (608, 'Atron', 25, 'Frigate'),
+    (582, 'Bantam', 25, 'Frigate'),
+    (598, 'Breacher', 25, 'Frigate'),
+    (599, 'Burst', 25, 'Frigate'),
+    (17619, 'Caldari Navy Hookbill', 25, 'Frigate'),
+    (583, 'Condor', 25, 'Frigate'),
+    (2161, 'Crucifier', 25, 'Frigate'),
+    (37453, 'Crucifier Navy Issue', 25, 'Frigate'),
+    (17926, 'Cruor', 25, 'Frigate'),
+    (47269, 'Damavik', 25, 'Frigate'),
+    (17928, 'Daredevil', 25, 'Frigate'),
+    (17932, 'Dramiel', 25, 'Frigate'),
+    (3532, 'Echelon', 25, 'Frigate'),
+    (589, 'Executioner', 25, 'Frigate'),
+    (17841, 'Federation Navy Comet', 25, 'Frigate'),
+    (33816, 'Garmur', 25, 'Frigate'),
+    (11940, 'Gold Magnate', 25, 'Frigate'),
+    (584, 'Griffin', 25, 'Frigate'),
+    (37455, 'Griffin Navy Issue', 25, 'Frigate'),
+    (605, 'Heron', 25, 'Frigate'),
+    (72904, 'Heron Navy Issue', 25, 'Frigate'),
+    (607, 'Imicus', 25, 'Frigate'),
+    (72913, 'Imicus Navy Issue', 25, 'Frigate'),
+    (17703, 'Imperial Navy Slicer', 25, 'Frigate'),
+    (594, 'Incursus', 25, 'Frigate'),
+    (590, 'Inquisitor', 25, 'Frigate'),
+    (602, 'Kestrel', 25, 'Frigate'),
+    (29248, 'Magnate', 25, 'Frigate'),
+    (72907, 'Magnate Navy Issue', 25, 'Frigate'),
+    (609, 'Maulus', 25, 'Frigate'),
+    (37456, 'Maulus Navy Issue', 25, 'Frigate'),
+    (603, 'Merlin', 25, 'Frigate'),
+    (77114, 'Metamorphosis', 25, 'Frigate'),
+    (592, 'Navitas', 25, 'Frigate'),
+    (586, 'Probe', 25, 'Frigate'),
+    (72903, 'Probe Fleet Issue', 25, 'Frigate'),
+    (597, 'Punisher', 25, 'Frigate'),
+    (17812, 'Republic Fleet Firetail', 25, 'Frigate'),
+    (587, 'Rifter', 25, 'Frigate'),
+    (11942, 'Silver Magnate', 25, 'Frigate'),
+    (54731, 'Skybreaker', 25, 'Frigate'),
+    (585, 'Slasher', 25, 'Frigate'),
+    (17924, 'Succubus', 25, 'Frigate'),
+    (591, 'Tormentor', 25, 'Frigate'),
+    (593, 'Tristan', 25, 'Frigate'),
+    (32880, 'Venture', 25, 'Frigate'),
+    (89648, 'Venture Consortium Issue', 25, 'Frigate'),
+    (3766, 'Vigil', 25, 'Frigate'),
+    (37454, 'Vigil Fleet Issue', 25, 'Frigate'),
+    (17930, 'Worm', 25, 'Frigate'),
+    (648, 'Badger', 28, 'Hauler'),
+    (1944, 'Bestower', 28, 'Hauler'),
+    (655, 'Epithal', 28, 'Hauler'),
+    (651, 'Hoarder', 28, 'Hauler'),
+    (657, 'Iteron Mark V', 28, 'Hauler'),
+    (654, 'Kryos', 28, 'Hauler'),
+    (652, 'Mammoth', 28, 'Hauler'),
+    (656, 'Miasmos', 28, 'Hauler'),
+    (32811, 'Miasmos Amastris Edition', 28, 'Hauler'),
+    (4363, 'Miasmos Quafe Ultra Edition', 28, 'Hauler'),
+    (4388, 'Miasmos Quafe Ultramarine Edition', 28, 'Hauler'),
+    (650, 'Nereus', 28, 'Hauler'),
+    (2998, 'Noctis', 28, 'Hauler'),
+    (2863, 'Primae', 28, 'Hauler'),
+    (19744, 'Sigil', 28, 'Hauler'),
+    (81008, 'Squall', 28, 'Hauler'),
+    (649, 'Tayra', 28, 'Hauler'),
+    (653, 'Wreathe', 28, 'Hauler'),
+    (2836, 'Adrestia', 358, 'Heavy Assault Cruiser'),
+    (74316, 'Bestla', 358, 'Heavy Assault Cruiser'),
+    (11993, 'Cerberus', 358, 'Heavy Assault Cruiser'),
+    (77726, 'Cybele', 358, 'Heavy Assault Cruiser'),
+    (12023, 'Deimos', 358, 'Heavy Assault Cruiser'),
+    (12011, 'Eagle', 358, 'Heavy Assault Cruiser'),
+    (52252, 'Ikitursa', 358, 'Heavy Assault Cruiser'),
+    (12005, 'Ishtar', 358, 'Heavy Assault Cruiser'),
+    (32209, 'Mimir', 358, 'Heavy Assault Cruiser'),
+    (12015, 'Muninn', 358, 'Heavy Assault Cruiser'),
+    (12019, 'Sacrilege', 358, 'Heavy Assault Cruiser'),
+    (11999, 'Vagabond', 358, 'Heavy Assault Cruiser'),
+    (3518, 'Vangel', 358, 'Heavy Assault Cruiser'),
+    (12003, 'Zealot', 358, 'Heavy Assault Cruiser'),
+    (12013, 'Broadsword', 894, 'Heavy Interdiction Cruiser'),
+    (12017, 'Devoter', 894, 'Heavy Interdiction Cruiser'),
+    (35781, 'Fiend', 894, 'Heavy Interdiction Cruiser'),
+    (60764, 'Laelaps', 894, 'Heavy Interdiction Cruiser'),
+    (11995, 'Onyx', 894, 'Heavy Interdiction Cruiser'),
+    (12021, 'Phobos', 894, 'Heavy Interdiction Cruiser'),
+    (28606, 'Orca', 941, 'Industrial Command Ship'),
+    (42244, 'Porpoise', 941, 'Industrial Command Ship'),
+    (11202, 'Ares', 831, 'Interceptor'),
+    (11196, 'Claw', 831, 'Interceptor'),
+    (11176, 'Crow', 831, 'Interceptor'),
+    (11184, 'Crusader', 831, 'Interceptor'),
+    (35779, 'Imp', 831, 'Interceptor'),
+    (11186, 'Malediction', 831, 'Interceptor'),
+    (11178, 'Raptor', 831, 'Interceptor'),
+    (11198, 'Stiletto', 831, 'Interceptor'),
+    (11200, 'Taranis', 831, 'Interceptor'),
+    (33673, 'Whiptail', 831, 'Interceptor'),
+    (22460, 'Eris', 541, 'Interdictor'),
+    (22464, 'Flycatcher', 541, 'Interdictor'),
+    (22452, 'Heretic', 541, 'Interdictor'),
+    (22456, 'Sabre', 541, 'Interdictor'),
+    (28848, 'Anshar', 902, 'Jump Freighter'),
+    (28850, 'Ark', 902, 'Jump Freighter'),
+    (28846, 'Nomad', 902, 'Jump Freighter'),
+    (28844, 'Rhea', 902, 'Jump Freighter'),
+    (77283, 'Bane', 4594, 'Lancer Dreadnought'),
+    (77281, 'Hubris', 4594, 'Lancer Dreadnought'),
+    (77284, 'Karura', 4594, 'Lancer Dreadnought'),
+    (77288, 'Valravn', 4594, 'Lancer Dreadnought'),
+    (11985, 'Basilisk', 832, 'Logistics'),
+    (32790, 'Etana', 832, 'Logistics'),
+    (11987, 'Guardian', 832, 'Logistics'),
+    (11989, 'Oneiros', 832, 'Logistics'),
+    (42245, 'Rabisu', 832, 'Logistics'),
+    (11978, 'Scimitar', 832, 'Logistics'),
+    (49713, 'Zarmazd', 832, 'Logistics'),
+    (37457, 'Deacon', 1527, 'Logistics Frigate'),
+    (37458, 'Kirin', 1527, 'Logistics Frigate'),
+    (37460, 'Scalpel', 1527, 'Logistics Frigate'),
+    (37459, 'Thalia', 1527, 'Logistics Frigate'),
+    (88001, 'Babaroga', 900, 'Marauder'),
+    (28710, 'Golem', 900, 'Marauder'),
+    (28661, 'Kronos', 900, 'Marauder'),
+    (28659, 'Paladin', 900, 'Marauder'),
+    (28665, 'Vargur', 900, 'Marauder'),
+    (17476, 'Covetor', 463, 'Mining Barge'),
+    (17480, 'Procurer', 463, 'Mining Barge'),
+    (17478, 'Retriever', 463, 'Mining Barge'),
+    (2078, 'Zephyr', 1022, 'Prototype Exploration Ship'),
+    (11134, 'Amarr Shuttle', 31, 'Shuttle'),
+    (29266, 'Apotheosis', 31, 'Shuttle'),
+    (64034, 'Boobook', 31, 'Shuttle'),
+    (672, 'Caldari Shuttle', 31, 'Shuttle'),
+    (34496, 'Council Diplomatic Shuttle', 31, 'Shuttle'),
+    (11129, 'Gallente Shuttle', 31, 'Shuttle'),
+    (21097, "Goru's Shuttle", 31, 'Shuttle'),
+    (21628, 'Guristas Shuttle', 31, 'Shuttle'),
+    (30842, 'InterBus Shuttle', 31, 'Shuttle'),
+    (33513, 'Leopard', 31, 'Shuttle'),
+    (11132, 'Minmatar Shuttle', 31, 'Shuttle'),
+    (92283, 'Moreau YC128 Campaign Bus', 5087, 'Special Edition Yachts'),
+    (635, 'Opux Luxury Yacht', 5087, 'Special Edition Yachts'),
+    (92284, 'Roden YC128 Campaign Bus', 5087, 'Special Edition Yachts'),
+    (92282, 'Tenzin YC128 Campaign Bus', 5087, 'Special Edition Yachts'),
+    (34590, 'Victorieux Luxury Yacht', 5087, 'Special Edition Yachts'),
+    (12034, 'Hound', 834, 'Stealth Bomber'),
+    (12032, 'Manticore', 834, 'Stealth Bomber'),
+    (11377, 'Nemesis', 834, 'Stealth Bomber'),
+    (12038, 'Purifier', 834, 'Stealth Bomber'),
+    (45530, 'Virtuoso', 834, 'Stealth Bomber'),
+    (29986, 'Legion', 963, 'Strategic Cruiser'),
+    (29990, 'Loki', 963, 'Strategic Cruiser'),
+    (29988, 'Proteus', 963, 'Strategic Cruiser'),
+    (29984, 'Tengu', 963, 'Strategic Cruiser'),
+    (23919, 'Aeon', 659, 'Supercarrier'),
+    (22852, 'Hel', 659, 'Supercarrier'),
+    (23913, 'Nyx', 659, 'Supercarrier'),
+    (3514, 'Revenant', 659, 'Supercarrier'),
+    (42125, 'Vendetta', 659, 'Supercarrier'),
+    (23917, 'Wyvern', 659, 'Supercarrier'),
+    (34317, 'Confessor', 1305, 'Tactical Destroyer'),
+    (35683, 'Hecate', 1305, 'Tactical Destroyer'),
+    (34828, 'Jackdaw', 1305, 'Tactical Destroyer'),
+    (89808, 'Skua', 1305, 'Tactical Destroyer'),
+    (34562, 'Svipul', 1305, 'Tactical Destroyer'),
+    (11567, 'Avatar', 30, 'Titan'),
+    (78576, 'Azariel', 30, 'Titan'),
+    (671, 'Erebus', 30, 'Titan'),
+    (45649, 'Komodo', 30, 'Titan'),
+    (3764, 'Leviathan', 30, 'Titan'),
+    (42241, 'Molok', 30, 'Titan'),
+    (23773, 'Ragnarok', 30, 'Titan'),
+    (42126, 'Vanquisher', 30, 'Titan'),
+)
+# END EMBEDDED SHIP HULLS
+
+
 CARGO_FLAG = 5
 DRONE_BAY_FLAG = 87
 FIGHTER_BAY_FLAG = 158
@@ -139,9 +560,8 @@ def configure_evejs_root(path: Path, *, persist: bool = True) -> Path:
 
 
 def set_evejs_root(path: Path) -> None:
-    global REPO_ROOT, CLIENT_SDE_EXPORTS_ROOT, CHARACTERS_DATA_PATH, SAVED_FITTINGS_DATA_PATH
+    global REPO_ROOT, CHARACTERS_DATA_PATH, SAVED_FITTINGS_DATA_PATH
     REPO_ROOT = Path(path).expanduser().resolve()
-    CLIENT_SDE_EXPORTS_ROOT = REPO_ROOT / "tools" / "ClientSDE" / "exports"
     CHARACTERS_DATA_PATH = REPO_ROOT / "server" / "src" / "newDatabase" / "data" / "characters" / "data.json"
     SAVED_FITTINGS_DATA_PATH = (
         REPO_ROOT / "server" / "src" / "newDatabase" / "data" / "savedFittings" / "data.json"
@@ -157,8 +577,6 @@ def ensure_evejs_runtime_ready(*, require_sde: bool = False) -> None:
     if not CHARACTERS_DATA_PATH.exists():
         raise FileNotFoundError(f"characters/data.json was not found: {CHARACTERS_DATA_PATH}")
     ensure_dir(SAVED_FITTINGS_DATA_PATH.parent)
-    if require_sde:
-        find_latest_sde_root()
 
 
 set_evejs_root(resolve_evejs_root())
@@ -332,28 +750,16 @@ class BuildContext:
     cache_root: Path
 
 
-def find_latest_sde_root() -> Path:
-    if not CLIENT_SDE_EXPORTS_ROOT.exists():
-        raise FileNotFoundError(f"ClientSDE exports root not found: {CLIENT_SDE_EXPORTS_ROOT}")
-
-    candidates: list[Path] = []
-    for candidate in CLIENT_SDE_EXPORTS_ROOT.glob("*/eve-online-static-data-*-jsonl"):
-        if (candidate / "types.jsonl").exists() and (candidate / "groups.jsonl").exists():
-            candidates.append(candidate)
-
-    if not candidates:
-        raise FileNotFoundError(
-            "No ClientSDE jsonl bundle was found under tools/ClientSDE/exports."
-        )
-
-    return max(candidates, key=lambda path: path.stat().st_mtime)
-
-
 def load_reference_data_from_library() -> tuple[dict[int, dict[str, Any]], dict[int, dict[str, Any]], list[ShipHull]]:
-    library = load_library_payload(required=True)
+    ship_list = load_ship_list_payload(required=False)
+    records = list(ship_list.get("ships") or []) if isinstance(ship_list, dict) else []
+    if not records:
+        library = load_library_payload(required=True)
+        records = list(library.get("records") or [])
+
     hulls: list[ShipHull] = []
     seen: set[int] = set()
-    for record in library.get("records") or []:
+    for record in records:
         if not isinstance(record, dict):
             continue
         type_id = to_int(record.get("shipTypeID"), 0)
@@ -371,7 +777,7 @@ def load_reference_data_from_library() -> tuple[dict[int, dict[str, Any]], dict[
         )
 
     if not hulls:
-        raise RuntimeError("The bundled FitALL library did not contain a refreshable ship list.")
+        raise RuntimeError("FitALL could not find its shipped ship list. Re-run the installer.")
 
     hulls.sort(key=lambda item: (item.group_name.lower(), item.name.lower(), item.type_id))
     return {}, {}, hulls
@@ -734,10 +1140,66 @@ def load_library_payload(*, required: bool = True) -> dict[str, Any]:
             return library
     if required:
         raise RuntimeError(
-            "No FitALL fitting library was found. Re-run the installer or use build-library "
-            "to refresh the shipped FitALL ship list from zKillboard/ESI."
+            "No FitALL fitting library was found. Refresh fittings from ESI & Killboards first."
         )
     return {}
+
+
+def embedded_ship_list_payload() -> dict[str, Any]:
+    ships = [
+        {
+            "shipTypeID": type_id,
+            "shipName": ship_name,
+            "groupID": group_id,
+            "groupName": group_name,
+        }
+        for type_id, ship_name, group_id, group_name in EMBEDDED_SHIP_HULLS[:MAX_CHAR_FITTINGS]
+    ]
+    return {
+        "generatedAt": "embedded",
+        "tool": "FitALL",
+        "shipCount": len(ships),
+        "limit": MAX_CHAR_FITTINGS,
+        "ships": ships,
+    }
+
+
+def load_ship_list_payload(*, required: bool = True) -> dict[str, Any]:
+    embedded = embedded_ship_list_payload()
+    if embedded.get("ships"):
+        return embedded
+
+    library = load_library_payload(required=False)
+    if isinstance(library, dict) and isinstance(library.get("records"), list):
+        ships = [
+            {
+                "shipTypeID": to_int(record.get("shipTypeID"), 0),
+                "shipName": str(record.get("shipName") or ""),
+                "groupID": to_int(record.get("groupID"), 0),
+                "groupName": str(record.get("groupName") or "Ship"),
+            }
+            for record in library.get("records") or []
+            if isinstance(record, dict) and to_int(record.get("shipTypeID"), 0) > 0
+        ]
+        return {
+            "generatedAt": library.get("generatedAt"),
+            "tool": "FitALL",
+            "shipCount": len(ships),
+            "ships": ships,
+        }
+
+    if required:
+        raise RuntimeError("No FitALL embedded ship list was found. Re-run the installer.")
+    return {}
+
+
+def summarize_ship_list_payload(ship_list: dict[str, Any] | None) -> dict[str, Any]:
+    payload = ship_list if isinstance(ship_list, dict) else {}
+    ships = list(payload.get("ships") or [])
+    return {
+        "generatedAt": payload.get("generatedAt"),
+        "shipCount": to_int(payload.get("shipCount"), len(ships)),
+    }
 
 
 def index_records_by_type_and_name(
@@ -1195,7 +1657,7 @@ def build_library(
         source_bundle = str(sde_root)
     else:
         types_by_id, _groups_by_id, hulls = load_reference_data_from_library()
-        source_bundle = str(BUNDLED_LIBRARY_JSON_PATH if BUNDLED_LIBRARY_JSON_PATH.exists() else LIBRARY_JSON_PATH)
+        source_bundle = "embedded FitALL ship catalog"
 
     if limit_hulls and limit_hulls > 0:
         hulls = hulls[:limit_hulls]
@@ -1380,6 +1842,7 @@ def summarize_library_payload(library: dict[str, Any] | None) -> dict[str, Any]:
 
 def load_tool_snapshot() -> dict[str, Any]:
     library = load_library_payload(required=False)
+    ship_list = load_ship_list_payload(required=False)
     checklist = read_json(CHECKLIST_JSON_PATH, {})
     seed_summary = read_json(SEED_SUMMARY_JSON_PATH, {})
     benchmark_summary = read_json(BENCHMARK_SUMMARY_JSON_PATH, {})
@@ -1397,6 +1860,8 @@ def load_tool_snapshot() -> dict[str, Any]:
         },
         "library": library if isinstance(library, dict) else {},
         "librarySummary": summarize_library_payload(library if isinstance(library, dict) else {}),
+        "shipList": ship_list if isinstance(ship_list, dict) else {},
+        "shipListSummary": summarize_ship_list_payload(ship_list if isinstance(ship_list, dict) else {}),
         "checklist": checklist if isinstance(checklist, dict) else {},
         "seedSummary": seed_summary if isinstance(seed_summary, dict) else {},
         "benchmarkSummary": benchmark_summary if isinstance(benchmark_summary, dict) else {},
@@ -1460,17 +1925,11 @@ def run_fitall_command(
     if needs_build:
         ensure_evejs_runtime_ready(require_sde=False)
         sde_root: Path | None = None
-        if os.environ.get("FITALL_USE_CLIENT_SDE") == "1":
-            try:
-                sde_root = find_latest_sde_root()
-            except FileNotFoundError:
-                sde_root = None
-        if sde_root is not None:
-            source_bundle = str(sde_root)
-            emit_log(log_callback, f"[FitALL] Using local SDE bundle: {sde_root}")
-        else:
-            source_bundle = str(BUNDLED_LIBRARY_JSON_PATH if BUNDLED_LIBRARY_JSON_PATH.exists() else LIBRARY_JSON_PATH)
-            emit_log(log_callback, "[FitALL] Refreshing the shipped FitALL ship list from zKillboard/ESI.")
+        source_bundle = "embedded FitALL ship catalog"
+        emit_log(
+            log_callback,
+            "[FitALL] Refreshing fittings from zKillboard/ESI using the embedded ship catalog.",
+        )
     else:
         ensure_evejs_runtime_ready(require_sde=False)
         sde_root = None

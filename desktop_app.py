@@ -257,6 +257,30 @@ class FitALLWindow(QMainWindow):
                 background: rgba(255,255,255,0.08);
                 border: 1px solid rgba(255,255,255,0.13);
             }
+            QPushButton#Ghost:hover {
+                color: #eef6ff;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 rgba(42,246,255,0.20), stop:0.55 rgba(255,123,184,0.16), stop:1 rgba(255,211,114,0.18));
+                border: 1px solid rgba(42,246,255,0.68);
+            }
+            QPushButton#RefreshButton {
+                min-height: 46px;
+                color: #06111d;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #78e5ff, stop:0.48 #8fffd2, stop:1 #ffd372);
+                border: 1px solid rgba(255,255,255,0.24);
+            }
+            QPushButton#RefreshButton:hover {
+                color: #020911;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #ffffff, stop:0.42 #8fffd2, stop:1 #ff7bb8);
+                border: 1px solid rgba(255,255,255,0.72);
+            }
+            QPushButton#Ghost:pressed,
+            QPushButton#RefreshButton:pressed {
+                background: rgba(255,255,255,0.16);
+                padding-top: 2px;
+            }
             """
         )
         outer = QVBoxLayout(shell)
@@ -372,12 +396,15 @@ class FitALLWindow(QMainWindow):
         self.ready_page.root.addWidget(self.path_label)
 
         self.primary_button = QPushButton("Fit Every Character")
+        self.primary_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.primary_button.clicked.connect(self.start_seed)
         self.choose_button = QPushButton("Choose EVE JS Folder")
         self.choose_button.setObjectName("Ghost")
+        self.choose_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.choose_button.clicked.connect(self.choose_evejs_folder)
         self.refresh_button = QPushButton("Refresh fittings from ESI && Killboards")
-        self.refresh_button.setObjectName("Ghost")
+        self.refresh_button.setObjectName("RefreshButton")
+        self.refresh_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.refresh_button.clicked.connect(self.start_refresh)
         self.ready_page.root.addWidget(self.primary_button)
         self.ready_page.root.addWidget(self.refresh_button)
@@ -447,17 +474,18 @@ class FitALLWindow(QMainWindow):
     def refresh_ready(self) -> None:
         snapshot = fitall.load_tool_snapshot()
         library_summary = snapshot.get("librarySummary") or {}
-        ship_count = int(library_summary.get("shipCount") or 0)
+        ship_list_summary = snapshot.get("shipListSummary") or {}
+        ship_count = int(library_summary.get("shipCount") or ship_list_summary.get("shipCount") or 0)
         harvested = int(library_summary.get("harvestedCount") or 0)
         self.ship_metric.set_metric(format_count(harvested or ship_count))
         coverage = "100%" if ship_count and harvested >= ship_count else f"{harvested}/{ship_count}"
-        self.coverage_metric.set_metric(coverage)
+        self.coverage_metric.set_metric(coverage if harvested else "refresh")
 
         if fitall.looks_like_evejs_root(fitall.REPO_ROOT):
             self.path_label.setText(f"EVE JS ready: {fitall.REPO_ROOT}")
-            self.primary_button.setEnabled(True)
+            self.primary_button.setEnabled(bool(harvested))
             self.refresh_button.setEnabled(True)
-            self.primary_button.setText("Fit Every Character")
+            self.primary_button.setText("Fit Every Character" if harvested else "Refresh Fittings First")
         else:
             self.path_label.setText("Choose your EVE JS folder once. FitALL remembers it after setup.")
             self.primary_button.setEnabled(True)
@@ -482,6 +510,18 @@ class FitALLWindow(QMainWindow):
     def start_seed(self) -> None:
         if not fitall.looks_like_evejs_root(fitall.REPO_ROOT):
             self.choose_evejs_folder()
+            return
+        if not (fitall.load_library_payload(required=False).get("records") or []):
+            self.show_error(
+                "No local fitting library was found yet. Click Refresh fittings from ESI & Killboards "
+                "to rebuild it from the embedded ship catalog."
+            )
+            self.error_retry.setText("Refresh fittings from ESI & Killboards")
+            try:
+                self.error_retry.clicked.disconnect()
+            except RuntimeError:
+                pass
+            self.error_retry.clicked.connect(self.start_refresh)
             return
         if self._worker and self._worker.isRunning():
             return
@@ -564,6 +604,7 @@ class FitALLWindow(QMainWindow):
 
     @Slot(dict)
     def on_worker_done(self, result: dict[str, Any]) -> None:
+        self._worker = None
         self._last_result = result
         elapsed = float(result.get("elapsedSeconds") or 0)
         if result.get("command") == "build-library":
@@ -595,11 +636,18 @@ class FitALLWindow(QMainWindow):
 
     @Slot(str, str)
     def on_worker_failed(self, message: str, traceback_text: str) -> None:
+        self._worker = None
         error_log = fitall.TOOL_ROOT / "last-crash.log"
         error_log.write_text(traceback_text, encoding="utf-8")
         self.show_error(message)
 
     def show_error(self, message: str) -> None:
+        self.error_retry.setText("Try Again")
+        try:
+            self.error_retry.clicked.disconnect()
+        except RuntimeError:
+            pass
+        self.error_retry.clicked.connect(self.start_seed)
         self.error_body.setText(message)
         self.stack.setCurrentWidget(self.error_page)
 

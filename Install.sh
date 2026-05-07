@@ -51,6 +51,29 @@ install_python_macos() {
   fi
 }
 
+choose_evejs_folder() {
+  case "$(uname -s)" in
+    Darwin)
+      if command -v osascript >/dev/null 2>&1; then
+        osascript -e 'POSIX path of (choose folder with prompt "Choose your EVE JS folder")' 2>/dev/null || true
+        return 0
+      fi
+      ;;
+  esac
+
+  if command -v zenity >/dev/null 2>&1; then
+    zenity --file-selection --directory --title "Choose your EVE JS folder" 2>/dev/null || true
+    return 0
+  fi
+
+  if command -v kdialog >/dev/null 2>&1; then
+    kdialog --getexistingdirectory "$HOME" "Choose your EVE JS folder" 2>/dev/null || true
+    return 0
+  fi
+
+  return 1
+}
+
 if ! have_python; then
   echo "Python 3.10+ was not found. Installing Python now..."
   case "$(uname -s)" in
@@ -76,7 +99,11 @@ fi
 
 while true; do
   if [ -z "$evejs_path" ]; then
-    printf "Paste your EVE JS folder path, then press Enter: "
+    echo "Choose your EVE JS folder in the picker that opens."
+    evejs_path="$(choose_evejs_folder || true)"
+  fi
+  if [ -z "$evejs_path" ]; then
+    printf "Picker cancelled or unavailable. Drag/paste your EVE JS folder path, then press Enter: "
     IFS= read -r evejs_path
   fi
   evejs_path="${evejs_path%\"}"

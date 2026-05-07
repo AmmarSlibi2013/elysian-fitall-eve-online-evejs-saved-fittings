@@ -112,7 +112,12 @@ if exist "config\evejs.path" (
 :AskPath
 if not defined EVEJS_PATH (
   echo.
-  echo Drag your EVE JS folder into this window, or paste its path, then press Enter.
+  echo Choose your EVE JS folder in the picker that opens.
+  call :PickEveJSFolder
+)
+if not defined EVEJS_PATH (
+  echo.
+  echo Picker cancelled. Drag your EVE JS folder here, or paste its path, then press Enter.
   set /p "EVEJS_PATH=EVE JS folder: "
 )
 set "EVEJS_PATH=%EVEJS_PATH:"=%"
@@ -123,4 +128,9 @@ if errorlevel 1 (
   set "EVEJS_PATH="
   goto AskPath
 )
+exit /b 0
+
+:PickEveJSFolder
+set "EVEJS_PATH="
+for /f "usebackq delims=" %%I in (`powershell -NoProfile -STA -ExecutionPolicy Bypass -EncodedCommand QQBkAGQALQBUAHkAcABlACAALQBBAHMAcwBlAG0AYgBsAHkATgBhAG0AZQAgAFMAeQBzAHQAZQBtAC4AVwBpAG4AZABvAHcAcwAuAEYAbwByAG0AcwAKACQAZABpAGEAbABvAGcAIAA9ACAATgBlAHcALQBPAGIAagBlAGMAdAAgAFMAeQBzAHQAZQBtAC4AVwBpAG4AZABvAHcAcwAuAEYAbwByAG0AcwAuAEYAbwBsAGQAZQByAEIAcgBvAHcAcwBlAHIARABpAGEAbABvAGcACgAkAGQAaQBhAGwAbwBnAC4ARABlAHMAYwByAGkAcAB0AGkAbwBuACAAPQAgACcAQwBoAG8AbwBzAGUAIAB5AG8AdQByACAARQBWAEUAIABKAFMAIABmAG8AbABkAGUAcgAnAAoAJABkAGkAYQBsAG8AZwAuAFMAaABvAHcATgBlAHcARgBvAGwAZABlAHIAQgB1AHQAdABvAG4AIAA9ACAAJABmAGEAbABzAGUACgBpAGYAIAAoACQAZABpAGEAbABvAGcALgBTAGgAbwB3AEQAaQBhAGwAbwBnACgAKQAgAC0AZQBxACAAWwBTAHkAcwB0AGUAbQAuAFcAaQBuAGQAbwB3AHMALgBGAG8AcgBtAHMALgBEAGkAYQBsAG8AZwBSAGUAcwB1AGwAdABdADoAOgBPAEsAKQAgAHsACgAgACAAIAAgAFsAQwBvAG4AcwBvAGwAZQBdADoAOgBXAHIAaQB0AGUATABpAG4AZQAoACQAZABpAGEAbABvAGcALgBTAGUAbABlAGMAdABlAGQAUABhAHQAaAApAAoAfQA=`) do set "EVEJS_PATH=%%I"
 exit /b 0

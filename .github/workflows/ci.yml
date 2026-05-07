@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip PySide6
+
+      - name: Compile
+        run: python -m py_compile fitall.py desktop_app.py
+
+      - name: CLI help
+        run: python fitall.py --help
+
+      - name: Desktop smoke test
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python desktop_app.py --smoke-test --no-show

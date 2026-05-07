@@ -1,0 +1,79 @@
+<svg width="1600" height="760" viewBox="0 0 1600 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FitALL benchmark</title>
+  <desc id="desc">ABSURD saved fitting seed benchmark for Elysian FitALL.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050b15"/>
+      <stop offset="0.55" stop-color="#0e1c2e"/>
+      <stop offset="1" stop-color="#180818"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#063343"/>
+      <stop offset="1" stop-color="#071827"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#352510"/>
+      <stop offset="1" stop-color="#121827"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a1029"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; letter-spacing: 0; }
+      .title { fill: #eef6ff; font-size: 64px; font-weight: 900; }
+      .subtitle { fill: #cbd8e8; font-size: 27px; font-weight: 700; }
+      .value { font-size: 58px; font-weight: 900; }
+      .label { fill: #eef6ff; font-size: 27px; font-weight: 900; }
+      .small { fill: #cbd8e8; font-size: 22px; font-weight: 600; }
+      .tiny { fill: #b9c7da; font-size: 20px; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1600" height="760" rx="0" fill="url(#bg)"/>
+  <path d="M-60 520 C280 420 526 510 846 346 C1108 212 1298 212 1680 150" fill="none" stroke="#2af6ff" stroke-width="3" opacity="0.42"/>
+  <path d="M-60 628 C260 552 536 630 860 468 C1114 342 1336 348 1680 290" fill="none" stroke="#ff7bb8" stroke-width="3" opacity="0.42"/>
+  <path d="M-40 392 C280 310 540 328 860 248 C1120 184 1340 130 1680 128" fill="none" stroke="#ffd372" stroke-width="3" opacity="0.34"/>
+  <rect x="70" y="64" width="1460" height="632" rx="34" fill="#081522" opacity="0.9" stroke="#31517a" stroke-width="2"/>
+
+  <text class="title" x="120" y="132">ABSURD Saved-Fitting Seed</text>
+  <text class="subtitle" x="1052" y="132">single click, public EVE JS clone</text>
+
+  <g>
+    <rect x="120" y="192" width="388" height="166" rx="22" fill="url(#card1)" stroke="#2af6ff" stroke-width="2"/>
+    <text class="value" x="154" y="264" fill="#2af6ff">415</text>
+    <text class="label" x="154" y="304">ship fittings</text>
+    <text class="small" x="154" y="334">one saved fitting per hull</text>
+
+    <rect x="606" y="192" width="388" height="166" rx="22" fill="url(#card2)" stroke="#ffd372" stroke-width="2"/>
+    <text class="value" x="640" y="264" fill="#ffd372">5,395</text>
+    <text class="label" x="640" y="304">rows generated</text>
+    <text class="small" x="640" y="334">13 characters x 415 fits</text>
+
+    <rect x="1092" y="192" width="388" height="166" rx="22" fill="url(#card3)" stroke="#ff7bb8" stroke-width="2"/>
+    <text class="value" x="1126" y="264" fill="#ff7bb8">0.402s</text>
+    <text class="label" x="1126" y="304">real write receipt</text>
+    <text class="small" x="1126" y="334">startup + seed + JSON write</text>
+  </g>
+
+  <g>
+    <rect x="120" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
+    <text class="value" x="150" y="482" fill="#78dcff" font-size="42">4.74ms</text>
+    <text class="label" x="150" y="516" font-size="24">best engine run</text>
+
+    <rect x="456" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
+    <text class="value" x="486" y="482" fill="#ffd372" font-size="42">7.0ms</text>
+    <text class="label" x="486" y="516" font-size="24">average engine run</text>
+
+    <rect x="792" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
+    <text class="value" x="822" y="482" fill="#ff7bb8" font-size="42">0</text>
+    <text class="label" x="822" y="516" font-size="24">characters skipped</text>
+
+    <rect x="1128" y="420" width="352" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
+    <text class="value" x="1158" y="482" fill="#5ff3cf" font-size="42">100%</text>
+    <text class="label" x="1158" y="516" font-size="24">published hull coverage</text>
+  </g>
+
+  <line x1="120" y1="602" x2="1480" y2="602" stroke="#31517a" stroke-width="2"/>
+  <text class="tiny" x="120" y="640">Measured May 7, 2026 against a fresh local clone of the public EVE JS repo.</text>
+  <text class="tiny" x="120" y="670">Default path uses the bundled FitALL library, so normal users do not wait on zKillboard or ESI harvesting.</text>
+</svg>

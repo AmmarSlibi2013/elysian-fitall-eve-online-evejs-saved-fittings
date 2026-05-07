@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+config/
+Fittings/
+reports/
+backups/
+_cache/
+_runtime/
+release/
+last-crash.log
+last-run.log
+*.tmp
+.DS_Store
+Thumbs.db

